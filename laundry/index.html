@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="얼룩 종류를 고르면 단계별 세탁법과 추천 제품을 알려 드려요.">
+<title>때를 아는 세탁 · 얼룩별 세탁 가이드</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F7F9; --card:#fff; --ink:#18242C; --sub:#5D6B74; --line:#E3EAEE;
+  --sky:#2FA8DC; --sky-d:#1C86B5; --sky-l:#E4F4FB; --mint:#E9F6F1; --warn:#FFF4E5; --warn-ink:#9A5B00;
+  --r:20px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
+body{min-height:100vh}
+button{font:inherit;color:inherit;border:0;background:none;cursor:pointer}
+.wrap{max-width:520px;margin:0 auto;padding:16px 18px 40px;min-height:100vh;display:flex;flex-direction:column}
+header.top{display:flex;align-items:center;gap:10px;height:48px}
+.back{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--card);border:1px solid var(--line);flex:none}
+.back svg{width:18px;height:18px}
+.brand{font-weight:900;font-size:15px;letter-spacing:-.02em}
+.brand span{color:var(--sky)}
+.crumbs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 14px}
+.chip{font-size:12px;font-weight:500;padding:5px 10px;border-radius:999px;background:var(--card);border:1px solid var(--line);color:var(--sub)}
+.chip b{color:var(--sky-d);font-weight:700;margin-right:4px}
+.view{animation:in .28s ease both}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+h1{font-size:28px;line-height:1.3;font-weight:900;letter-spacing:-.03em}
+h2{font-size:22px;line-height:1.35;font-weight:900;letter-spacing:-.03em;margin-bottom:6px}
+.lead{color:var(--sub);font-size:15px;line-height:1.6}
+.eyebrow{font-size:12px;font-weight:700;color:var(--sky-d);letter-spacing:.04em;margin-bottom:6px}
+
+/* home */
+.hero{background:var(--card);border-radius:28px;padding:28px 22px 24px;border:1px solid var(--line);text-align:center;margin-top:8px}
+.hero .art{display:flex;justify-content:center;gap:4px;margin:6px 0 18px}
+.hero .art img{height:84px;width:auto}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0 22px}
+.rule{background:var(--sky-l);border-radius:14px;padding:12px 6px;font-size:12.5px;font-weight:700;line-height:1.35;color:var(--sky-d)}
+.rule i{display:block;font-style:normal;font-size:20px;margin-bottom:4px}
+.cta{width:100%;height:56px;border-radius:16px;background:var(--ink);color:#fff;font-weight:700;font-size:16px;display:flex;align-items:center;justify-content:center;gap:8px;transition:transform .12s}
+.cta:active{transform:scale(.98)}
+.cta.sky{background:var(--sky)}
+.ghost{width:100%;height:52px;border-radius:16px;background:var(--card);border:1px solid var(--line);font-weight:700;font-size:15px}
+.foot{margin-top:auto;padding-top:28px;text-align:center;font-size:11.5px;color:#9AA7AF;line-height:1.6}
+
+/* lists */
+.list{display:flex;flex-direction:column;gap:12px;margin-top:18px}
+.opt{display:flex;align-items:center;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;text-align:left;transition:border-color .15s,transform .12s}
+.opt:hover{border-color:var(--sky)}
+.opt:active{transform:scale(.985)}
+.num{flex:none;font-size:12px;font-weight:900;color:var(--sky-d);background:var(--sky-l);border-radius:8px;padding:4px 7px;min-width:34px;text-align:center}
+.opt .t{flex:1;min-width:0}
+.opt .t b{display:block;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.opt .t small{display:block;font-size:13px;color:var(--sub);margin-top:3px;line-height:1.45}
+.opt .thumb{flex:none;width:64px;height:64px;border-radius:14px;background:var(--mint);display:grid;place-items:center}
+.opt .thumb img{max-width:50px;max-height:50px}
+.arrow{flex:none;color:#B5C1C8}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:18px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 12px 14px;text-align:left;display:flex;flex-direction:column;gap:10px;transition:border-color .15s,transform .12s;position:relative}
+.tile:hover{border-color:var(--sky)}
+.tile:active{transform:scale(.98)}
+.tile .pic{height:96px;border-radius:14px;background:var(--mint);display:grid;place-items:center}
+.tile .pic img{max-width:78%;max-height:76px}
+.tile .num{position:absolute;top:20px;left:18px}
+.tile b{font-size:16px;font-weight:700;letter-spacing:-.02em}
+.tile small{font-size:12px;color:var(--sub);line-height:1.4;margin-top:-6px}
+.tile .split{position:absolute;top:20px;right:18px;font-size:10.5px;font-weight:700;color:#fff;background:var(--sky);border-radius:6px;padding:3px 6px}
+
+/* question */
+.qart{background:var(--card);border:1px solid var(--line);border-radius:24px;height:170px;display:grid;place-items:center;margin:4px 0 18px}
+.qart img{max-height:130px;max-width:70%}
+
+/* steps */
+.progress{display:flex;gap:5px;margin:4px 0 16px}
+.progress span{flex:1;height:5px;border-radius:3px;background:var(--line);transition:background .25s}
+.progress span.on{background:var(--sky)}
+.stepcard{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:22px 20px 24px;min-height:330px;display:flex;flex-direction:column}
+.stepcard .pic{height:150px;border-radius:18px;background:var(--mint);display:grid;place-items:center;margin-bottom:20px}
+.stepcard .pic img{max-height:118px;max-width:70%}
+.stepno{font-size:13px;font-weight:900;color:var(--sky-d);margin-bottom:8px}
+.stepno em{font-style:normal;color:#A9B6BE;font-weight:500}
+.steptext{font-size:19px;line-height:1.6;font-weight:500;letter-spacing:-.02em;word-break:keep-all}
+.notes{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.note{border-radius:14px;padding:12px 14px;font-size:13.5px;line-height:1.55;word-break:keep-all;display:flex;gap:8px}
+.note.w{background:var(--warn);color:var(--warn-ink)}
+.note.t{background:var(--sky-l);color:var(--sky-d)}
+.note b{flex:none}
+.nav{display:grid;grid-template-columns:1fr 2fr;gap:10px;margin-top:16px}
+.nav .ghost,.nav .cta{height:54px}
+.dots{display:flex;flex-direction:column;gap:6px;margin-top:16px}
+.mini{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--sub);line-height:1.5;padding:8px 4px;text-align:left;width:100%;border-radius:10px}
+.mini.cur{color:var(--ink);font-weight:500;background:var(--card)}
+.mini i{flex:none;font-style:normal;font-weight:900;font-size:12px;color:var(--sky-d);width:34px}
+
+/* result */
+.done{text-align:center;margin:6px 0 16px}
+.done .badge{display:inline-block;font-size:12px;font-weight:700;color:var(--sky-d);background:var(--sky-l);border-radius:999px;padding:6px 12px;margin-bottom:10px}
+.prod{background:var(--card);border:1px solid var(--line);border-radius:26px;overflow:hidden;margin-bottom:14px}
+.prod .head{display:flex;gap:16px;align-items:center;padding:20px 20px 14px}
+.prod .pimg{flex:none;width:86px;height:104px;border-radius:18px;background:var(--mint);display:grid;place-items:center}
+.prod .pimg svg{width:58px;height:84px}
+.prod .tag{font-size:11.5px;font-weight:700;color:var(--sky-d)}
+.prod .nm{font-size:21px;font-weight:900;letter-spacing:-.03em;margin:2px 0 4px}
+.prod .why{font-size:12.5px;color:var(--sub)}
+.prod .body{padding:0 20px 18px;font-size:14px;line-height:1.65;color:#33424B;word-break:keep-all}
+.prod .body .pn{margin-top:8px;font-size:12.5px;color:var(--warn-ink)}
+.qrrow{display:flex;gap:16px;align-items:center;border-top:1px dashed var(--line);padding:16px 20px;background:#FBFDFE}
+.qr{flex:none;width:108px;height:108px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:8px}
+.qr svg{width:100%;height:100%;display:block}
+.qrtxt{flex:1;font-size:13px;color:var(--sub);line-height:1.5}
+.qrtxt b{display:block;color:var(--ink);font-size:14.5px;margin-bottom:4px}
+.qrtxt a{display:inline-flex;margin-top:10px;font-size:13px;font-weight:700;color:#fff;background:var(--sky);border-radius:10px;padding:8px 12px;text-decoration:none}
+.reel{display:flex;gap:14px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:20px;padding:14px 16px;margin-bottom:14px}
+.reel .qr{width:84px;height:84px;padding:6px;border-radius:12px}
+.reel a{color:var(--sky-d);font-weight:700;font-size:13px;text-decoration:none}
+.stopcard{background:var(--warn);color:var(--warn-ink);border-radius:22px;padding:18px 20px;font-size:14.5px;line-height:1.6;margin-bottom:14px}
+.actions{display:grid;gap:10px;margin-top:6px}
+img{mix-blend-mode:multiply}
+.hero .art img,.qart img{mix-blend-mode:normal}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<script>
+const DATA = {"products":{"stain":{"name":"피퍼 얼룩 제거제","tag":"얼룩 집중 케어","desc":"피퍼 라인 중 세척력이 가장 강하고 살균까지 돼요. 뿌리고 솔질하거나 비빈 뒤, 얼룩에 따라 3~24시간 두었다가 세탁하면 돼요.","note":"컬러 옷은 색이 빠질 수 있으니 안쪽 시접에 먼저 테스트하세요.","url":"https://search.shopping.naver.com/search/all?query=%ED%94%BC%ED%8D%BC%20%EC%96%BC%EB%A3%A9%20%EC%A0%9C%EA%B1%B0%EC%A0%9C"},"o2":{"name":"오투와셔","tag":"찌든 때 · 표백 · 냄새","desc":"과탄산나트륨·베이킹소다·구연산을 최적 비율로 섞은 세제 보조제예요. 흰 옷은 더 하얗게, 컬러 옷은 더 선명하게. 1회분씩 소분 포장이라 계량이 필요 없어요.","note":"꼭 세제와 함께 쓰고, 헹굼을 1~2회 추가하세요. 표백 성분이 있어 컬러 옷은 주의!","url":"https://search.shopping.naver.com/search/all?query=%EC%98%A4%ED%88%AC%EC%99%80%EC%85%94"},"detergent":{"name":"피퍼 세제","tag":"데일리 마무리 세탁","desc":"파인애플 발효액 기반의 세제로, 신생아부터 온 가족 옷을 하나로 빨 수 있어요. 세탁물 5kg에 10ml(밥숟가락 하나)면 충분해요.","note":"얼룩을 지운 뒤에는 꼭 전체 세탁으로 마무리하세요.","url":"https://search.shopping.naver.com/search/all?query=%ED%94%BC%ED%8D%BC%20%EC%84%B8%EC%A0%9C"},"down":{"name":"다운와셔","tag":"패딩 · 기능성 의류 전용","desc":"시어 버터가 패딩의 필파워를 되살려 주고, 잔류 걱정 없이 잘 헹궈져요. 식물 유래 계면 활성제라 아기 옷에도 쓸 수 있어요.","note":"패딩은 얼룩을 먼저 지운 뒤 다운와셔로만 세탁하는 걸 추천해요.","url":"https://search.shopping.naver.com/search/all?query=%EB%8B%A4%EC%9A%B4%EC%99%80%EC%85%94"}},"cats":[{"id":"food","name":"음식물 오염","desc":"커피, 국물, 와인, 기름처럼 먹다가 생긴 얼룩","img":"redsoup"},{"id":"school","name":"학용품 오염","desc":"사인펜, 볼펜, 물감, 크레용처럼 아이들 옷에 자주 묻는 얼룩","img":"pen"},{"id":"life","name":"생활 오염","desc":"땀, 피, 기름, 페인트, 이염처럼 생활 속에서 생긴 얼룩","img":"sweat"}],"stains":[{"id":"dairy","cat":"food","name":"유제품","sub":"우유 · 요거트","img":"dairy","method":{"steps":["얼룩에 찬물을 뿌려 주세요.","빨랫비누를 얼룩에 비빈 뒤 솔로 박박 문질러요.","미지근한 물을 한 번 더 뿌리고, 다시 빨랫비누칠을 해서 문질러요.","그대로 30분 두었다가 세제 없이 세탁기 표준코스로 돌려요.","그늘진 곳에서 자연 건조해요."],"product":["stain"],"warn":["뜨거운 물은 유지방 성분을 고착시킬 수 있어요."],"tip":[],"reel":"https://www.instagram.com/reel/C2YjmuJv6d9/","title":null}},{"id":"fruit","cat":"food","name":"과일","sub":"오래된 과일 얼룩까지","img":"fruit","method":{"steps":["먼저 흐르는 미지근한 물에 씻어 줘요.","피퍼 얼룩 제거제를 뿌리고, 칫솔 손잡이로 꾹 누르며 밀어내듯 긁어요. 제거제를 섬유에 스며들게 하는 과정이에요.","오염이 심하면 2회 정도 반복하세요.","6~24시간 그대로 두었다가 물을 뿌리고 솔질한 뒤 세탁해요.","남은 얼룩이 있다면 오투와셔와 세탁 세제를 섞어 비빈 뒤, 잠시 두었다가 다시 세탁해요."],"product":["stain","o2"],"warn":["바로 물로 씻지 않으면 다른 곳으로 번질 수 있어요.","뜨거운 물은 과일 색소를 착색시켜요. 꼭 미지근한 물로!"],"tip":[],"reel":"https://www.instagram.com/reel/C15zLREp74v/","title":null}},{"id":"ketchup","cat":"food","name":"케첩","sub":"소스 · 건더기 음식","img":"ketchup","method":{"steps":["손을 대지 말고 강한 수돗물로 털어내요. 건더기가 많으면 옷을 뒤집어 뒷면에 물을 흘려 털어요.","중성세제와 식초를 1:1로 섞어 오염 부위에 발라요. 피퍼 얼룩 제거제를 뿌려도 좋아요.","마구 비빈 뒤 세탁하면 끝!"],"product":["stain"],"warn":[],"tip":[],"reel":"https://www.instagram.com/reel/CzsEJ7YJiWz/","title":null}},{"id":"redsoup","cat":"food","name":"빨간 국물","sub":"김치찌개 · 떡볶이 · 짬뽕","img":"redsoup","method":{"steps":["옷을 뒤집어 흐르는 물에 고춧가루, 마늘 같은 양념을 밀어내요.","1차로 주방 세제를 부어 비벼 주세요.","물로 헹군 뒤 피퍼 얼룩 제거제를 뿌리고 비비거나 솔질한 다음 전체 세탁해요.","고추·토마토 성분은 원단에 남을 수 있어요. 2번 정도 반복하고, 꼭 햇빛에 말려 주세요."],"product":["stain"],"warn":["물티슈로 누르며 닦으면 붉은색이 오히려 착색돼요.","얼룩에 세제만 바로 묻혀도 얼룩이 굳을 수 있어요."],"tip":[],"reel":"https://www.instagram.com/reel/CwtkwiyJ13B/","title":null}},{"id":"coffee","cat":"food","name":"커피","sub":"아메리카노 · 주스 · 구토","img":"coffee","branch":{"q":"얼룩 상태가 어떤가요?","options":[{"label":"방금 흘렸어요","desc":"작고 생긴 지 얼마 안 된 얼룩","method":{"steps":["물수건으로 빨리 닦아 주세요. 물티슈라면 알코올이 없는 제품이어야 해요.","중성세제와 식초를 1:1로 섞어요. 양은 얼룩 크기에 맞춰 조절해요.","얼룩 부분에 묻혀 조물조물한 뒤 15분 정도 불려요.","피퍼 얼룩 제거제를 뿌리고 잠시 둬요.","세탁기 표준코스, 30°C 이하로 돌리면 끝!"],"product":["stain"],"warn":[],"tip":[],"reel":null,"title":null}},{"label":"크거나 오래됐어요","desc":"번졌거나 시간이 지난 얼룩","method":{"steps":["중성세제와 식초를 1:1로 섞어요.","얼룩 부분에 묻혀 조물조물한 뒤 15분 정도 불려요.","오투와셔와 세제를 푼 물에 하루 담가 둬요.","세탁기 표준코스, 30°C 이하로 돌리면 끝!"],"product":["o2"],"warn":[],"tip":[],"reel":null,"title":null}}]},"warn":["뜨거운 물로 세탁하지 마세요. 얼룩이 굳어요.","과탄산소다는 금지! 커피는 산성 얼룩이라 알칼리성 세제와 만나면 고착될 수 있어요."],"reel":"https://www.instagram.com/reel/CwELMhIgfSD/"},{"id":"wine","cat":"food","name":"와인","sub":"레드 와인 · 포도주스","img":"wine","method":{"steps":["주방 세제와 백식초를 1:1로 분무기에 넣고 잘 섞어요.","얼룩 아래 수건을 깔고, 섞은 세제를 뿌린 뒤 부드러운 솔로 솔질해요.","물로 헹궈 보고, 얼룩이 남았다면 앞의 두 과정을 반복해요.","얼룩이 다 지워지면 세제가 남지 않게 손으로 충분히 비벼 헹궈요.","세탁기에 중성세제를 넣고 표준코스로 돌리면 끝!"],"product":["detergent"],"warn":[],"tip":[],"reel":"https://www.instagram.com/reel/C8asSbky_0r/","title":null}},{"id":"doraji","cat":"food","name":"도라지 · 영양제","sub":"오래된 도라지청 · 오메가3","img":"doraji","method":{"steps":["얼룩에 물을 묻히고, 오투와셔와 세제를 1:1로 섞어 부어요. 칫솔로 한 번 비벼요.","2~6시간 그대로 둬요. 색이 빠질 수 있으니 1~2시간마다 확인하세요.","세탁기에 세제를 넣고 표준코스로 돌려요."],"product":["o2"],"warn":[],"tip":["오메가3 얼룩도 같은 방법으로 지울 수 있어요."],"reel":"https://www.instagram.com/reel/C85kaqkSSfq/","title":null}},{"id":"oil","cat":"food","name":"식용 기름","sub":"고기 기름 · 식용유 · 버터","img":"oil","method":{"steps":["주방 세제와 클렌징 폼을 1:1로 섞어요. 비율은 대략이어도 괜찮아요.","오염 부위에 붓고 칫솔로 비벼요. 오래된 얼룩이면 잠시 그대로 둬요.","수돗물 중 가장 뜨거운 물로 헹구며 비벼요.","세제를 조금 추가해 세탁기 표준코스로 돌리면 끝!"],"product":["stain"],"warn":["석유 계열 기름은 집에서 말고 세탁소에 맡기세요."],"tip":["얼룩이 남으면 한두 번 더 반복하거나, 피퍼 얼룩 제거제와 클렌징 폼으로 해 보세요."],"reel":"https://www.instagram.com/reel/C1qRv85JEHK/","title":null}},{"id":"pen","cat":"school","name":"사인펜","sub":"수성 · 유성 사인펜","img":"pen","branch":{"q":"어떤 방법으로 지워 볼까요?","options":[{"label":"피퍼 얼룩 제거제로","desc":"뿌려 두고 기다리는 간편한 방법","method":{"steps":["마른 상태에서 얼룩에 피퍼 얼룩 제거제를 뿌려요.","가볍게 두드리거나 솔질해요.","하루 그대로 두고, 다음 날 물을 뿌린 뒤 솔질해요.","헹구지 않고 그대로 세탁기에 넣고 중성세제를 추가해 표준코스로 돌려요. 안 빠지면 2~3회 반복해요."],"product":["stain"],"warn":["컬러 옷은 오래 두면 색이 빠질 수 있어요."],"tip":[],"reel":"https://www.instagram.com/reel/C9G4SzDJ-X2/","title":null}},{"label":"살충제 · WD-40으로","desc":"집에 있는 스프레이로 바로","method":{"steps":["살충제(또는 WD-40)를 얼룩에 듬뿍 뿌리고 비비거나 솔질해요.","흐르는 물로 헹군 뒤 세탁 세제 원액을 붓고 다시 비비거나 솔질해요.","한 번에 안 지워지면 세제를 더 붓고 솔질해요. 세제 대신 피퍼 얼룩 제거제도 좋아요.","얼룩이 어느 정도 지워진 걸 확인하고 전체 세탁해요."],"product":["stain"],"warn":["살충제나 WD-40을 쓴 뒤 세제로 비비지 않으면 또 얼룩이 져요."],"tip":[],"reel":"https://www.instagram.com/reel/CxErETZpDqh/","title":null}}]}},{"id":"watercolor","cat":"school","name":"물감","sub":"아크릴 · 포스터 물감","img":"paint","method":{"steps":["얼룩에 에탄올(또는 손 소독 젤)을 충분히 부어요.","동전으로 얼룩을 살살 긁어요. 얇은 옷은 힘 조절, 나염 프린트 부분은 피해서 긁어요.","얼룩이 희미해지면 에탄올을 다시 붓고 키친타월을 올려 동전으로 긁어요. 물감이 키친타월에 묻어 나와요.","세탁기 표준코스로 돌려요.","흰 옷·연한 컬러에 얼룩이 남았다면 피퍼 얼룩 제거제를 뿌리고 솔질 후 세탁해요."],"product":["stain"],"warn":["소주로는 안 돼요.","얼룩이 희미하게 남을 수 있어요."],"tip":[],"reel":"https://www.instagram.com/reel/DAA6MF-PKwW/","title":null}},{"id":"whiteout","cat":"school","name":"수정액","sub":"화이트 · 수정펜","img":"whiteout","method":{"steps":["무작정 비비지 말고, 얼룩에 버터나 올리브 오일을 부어 칫솔 꼬리나 버터나이프로 긁어요.","공들여 오래 긁으면 수정액이 하얗게 녹아 나오기 시작해요.","알코올을 붓고 동전이나 카드로 한 번 더 긁어요.","솔에 세탁 세제를 뿌려 얼룩 부위를 솔질해요.","뜨거운 물에 비비며 헹군 뒤, 중성세제를 넣고 표준코스로 돌려요."],"product":["detergent"],"warn":[],"tip":[],"reel":"https://www.instagram.com/reel/C4fQY8Zuw1z/","title":null}},{"id":"ink","cat":"school","name":"볼펜 · 잉크","sub":"볼펜 · 만년필 · 잉크","img":"ink","branch":{"q":"어떤 옷에 묻었나요?","options":[{"label":"패딩","desc":"다운 · 충전재가 있는 옷","method":{"steps":["피퍼 얼룩 제거제를 뿌리고 비빈 다음 물로 헹궈요. 2회 반복해요.","세탁기에 세제 없이 표준코스 · 헹굼 2회 · 강탈수로 돌려요. 중간에 전체 세탁해야 잉크가 안 번져요.","다시 얼룩 제거제를 뿌리고 솔질해요.","1시간 그대로 둔 뒤 다시 솔질해요.","다운와셔를 넣고 표준코스 · 40°C · 헹굼 5회 · 강탈수로 세탁해요.","건조기에 양모 볼 4~5개와 저온코스 2회, 하루 말린 뒤 표준코스로 1회 더 돌려요."],"product":["stain","down"],"warn":[],"tip":[],"reel":"https://www.instagram.com/reel/DFMCCFBzEmk/","title":null}},{"label":"패딩이 아닌 옷","desc":"티셔츠 · 셔츠 · 바지 등","method":{"steps":["얼룩에 피퍼 얼룩 제거제를 뿌리고 솔질한 다음 헹궈요. 2회 반복해요.","세탁기에 세제 없이 표준코스 · 헹굼 2회로 돌려요.","앞의 두 과정을 한 번 더 반복해요."],"product":["stain"],"warn":[],"tip":[],"reel":null,"title":null}}]},"warn":["물로 헹구지 않으면 잉크가 다른 곳에 묻어요.","세탁을 너무 반복하면 원단이 상해요. 옅은 얼룩은 남을 수 있어요."]},{"id":"crayon","cat":"school","name":"크레용","sub":"크레파스 · 왁스 성분","img":"crayon","method":{"steps":["얼룩 위를 키친타월로 덮어요.","중간 온도의 다리미로 다려요. 왁스 성분이 녹아 키친타월로 옮겨 가요.","남은 얼룩이 있으면 세제와 베이킹소다, 또는 피퍼 얼룩 제거제를 뿌리고 비벼요.","몇 시간 두었다가 세탁해요."],"product":["stain"],"warn":[],"tip":["벽지나 바닥에 묻었다면 WD-40을 뿌리고 마른 걸레로 닦으면 잘 지워져요."],"reel":"https://www.instagram.com/reel/Cru95iPAcuX/","title":null}},{"id":"sweat","cat":"life","name":"땀","sub":"목 때 · 겨드랑이 누런 얼룩","img":"sweat","branch":{"q":"옷 색깔이 어떤가요?","options":[{"label":"흰 옷","desc":"흰색 · 아주 연한 색","method":{"steps":["대야에 따뜻한 물을 받아 오투와셔 1봉과 세제를 잘 섞어요.","옷을 담가 조물조물해요.","6~24시간 그대로 담가 둬요.","세탁기에 중성세제를 넣고 표준코스로 전체 세탁하면 끝!"],"product":["o2"],"warn":[],"tip":[],"reel":null,"title":null}},{"label":"컬러 옷","desc":"유색 · 진한 색","method":{"steps":["대야에 따뜻한 물을 받아 오투와셔 1봉과 세제를 잘 섞어요.","옷을 담가 조물조물해요.","2시간마다 확인하며 담가 둬요. 너무 오래 두면 황변이 생기거나 색이 빠질 수 있어요. 찌든 때가 심하면 12~24시간까지.","세탁기에 중성세제를 넣고 표준코스로 전체 세탁하면 끝!"],"product":["o2"],"warn":[],"tip":[],"reel":null,"title":null}}]},"warn":["오투와셔는 세제 보조제라 꼭 세제와 함께 써 주세요.","과탄산소다는 너무 적게 넣거나 찬물에 풀면 효과가 없어요.","땀 얼룩을 오래 두면 탈색되어 복구가 불가능해요."],"reel":"https://www.instagram.com/reel/C4h0g-rOFkD/"},{"id":"blood","cat":"life","name":"피","sub":"생리혈 · 상처 · 누런 속옷","img":"blood","branch":{"q":"언제 생긴 얼룩인가요?","options":[{"label":"생긴 지 얼마 안 됐어요","desc":"며칠 이내의 얼룩","method":{"steps":["얼룩 크기만큼 클렌징 폼을 짜요.","물 몇 방울을 떨어트리고 칫솔로 비벼요.","오염 정도에 따라 10~30분 그대로 둬요.","살짝 비빈 뒤 물로 헹구면 끝!"],"product":["o2"],"warn":[],"tip":["속옷은 삶으면 고무밴드가 변형돼요. 유통기한 지난 클렌징 폼을 모아 두었다가 활용해 보세요.","그래도 남으면 오투와셔로 한 번 더!"],"reel":"https://www.instagram.com/reel/CwWMomwgPO4/","title":null}},{"label":"오래된 얼룩이에요","desc":"몇 달 · 몇 년 된 얼룩","method":{"steps":["오투와셔와 세제를 섞어 얼룩에 발라요.","24시간 그대로 둬요.","세제를 넣고 세탁기로 돌려요."],"product":["o2"],"warn":[],"tip":[],"reel":"https://www.instagram.com/reel/DHHmfhKzQGm/","title":null}}]}},{"id":"sticky","cat":"life","name":"끈적이","sub":"모기 패치 · 스티커 · 밴드","img":"sticky","method":{"steps":["끈적이 부분에 선크림을 꼼꼼히 발라요.","5분 정도 기다려요.","물수건으로 살살 닦아내면 감쪽같이 사라져요.","마무리로 평소처럼 세탁해요."],"product":["detergent"],"warn":[],"tip":["선크림이 없다면 손 소독 젤을 듬뿍 바르고 카드나 동전으로 긁어 주세요."],"reel":"https://www.instagram.com/reel/Cu8F2UVgdGn/","title":null}},{"id":"bike","cat":"life","name":"자전거 · 엔진 기름","sub":"체인 기름 · 정비소 기름","img":"bike","branch":{"q":"집에 있는 걸로 골라 보세요","options":[{"label":"마요네즈","desc":"주방에 있는 마요네즈로","method":{"steps":["마른 상태에서 얼룩에 마요네즈를 살살 발라 비벼요.","그 위에 주방 세제를 짜서 다시 비벼요.","뜨거운 물에 얼룩 부위를 헹구며 다시 비벼요.","세탁기에 넣고 표준세탁 해 주세요."],"product":["stain"],"warn":[],"tip":[],"reel":"https://www.instagram.com/reel/C9Y7_XEpVer/","title":null}},{"label":"WD-40","desc":"오래된 기름 얼룩에도","method":{"steps":["WD-40을 기름 얼룩에 뿌려요.","주방 세제를 듬뿍 뿌리고, 따뜻한 물로 헹구며 다시 비벼요.","옷 전체를 물에 2~3번 헹궈요.","세탁기 표준코스로 전체 세탁해요. 냄새가 나면 한 번 더! 섬유유연제도 도움이 돼요."],"product":["stain"],"warn":[],"tip":[],"reel":"https://www.instagram.com/reel/C47kJb_uj_r/","title":null}}]}},{"id":"machine","cat":"life","name":"기계기름","sub":"기계 · 공구에 닿은 얼룩","img":"machine","method":{"steps":["대야에 가장 뜨거운 수돗물을 받아 베이킹소다 1컵과 세제를 잘 섞어요.","얼룩 부분을 30분 담가요.","손으로 비벼요. 비비는 동안 얼룩이 옅어지는 게 보여요.","세탁기 표준코스로 돌려요. 세제는 추가하지 않아도 돼요."],"product":["stain"],"warn":[],"tip":["베이킹소다와 세제 대신 피퍼 얼룩 제거제를 뿌려도 좋아요."],"reel":"https://www.instagram.com/reel/C2qobLovc16/","title":null}},{"id":"paint","cat":"life","name":"페인트","sub":"손톱보다 작은 얼룩","img":"paint","method":{"steps":["얼룩에 에탄올을 충분히 부어요. 손 소독 젤도 괜찮아요.","동전으로 얼룩을 긁어요. 얇은 옷은 힘 조절, 나염 프린트는 피해서요.","희미해지면 에탄올을 다시 붓고 키친타월을 올려 동전으로 긁어요. 페인트가 키친타월로 묻어 나와요.","세탁기 표준코스로 돌려요. 검은 옷이면 전용 세제나 블랙 시트 3장 이상을 함께 넣어 자국을 가려요.","흰색·연한 옷에 남았다면 피퍼 얼룩 제거제를 뿌리고 솔질 후 세탁해요."],"product":["stain"],"warn":["소주로는 안 돼요.","얼룩이 크면 자국이 남을 수 있어요."],"tip":[],"reel":"https://www.instagram.com/reel/DAA6MF-PKwW/","title":null}},{"id":"asphalt","cat":"life","name":"아스팔트","sub":"타르 · 도로 얼룩","img":"asphalt","method":{"steps":["스티커 제거제를 얼룩 부위에 집중적으로 뿌려요.","얼룩 부위를 솔질해요.","솔에 주방 세제를 묻혀 다시 솔질해요. 대충 말고, 팔이 떨어져 나가도록!","물에 헹궈요. 얼룩이 남았다면 처음부터 2~3회 반복해요.","세탁기 표준코스로 돌린 뒤 자연 건조해요."],"product":["stain"],"warn":[],"tip":[],"reel":"https://www.instagram.com/reel/C_y8tXlvHNH/","title":null}},{"id":"dye","cat":"life","name":"이염","sub":"다른 옷 색이 물들었을 때","img":"dye","branch":{"q":"물든 옷이 어떤 옷인가요?","options":[{"label":"단색 옷","desc":"한 가지 색으로 된 옷","method":{"steps":["미지근한 물에 액상 세제와 오투와셔 1봉지를 잘 섞어요.","이염된 옷과 이염 방지 티슈 2~3장을 넣고 조물조물해요.","푹 담근 상태로 하루 그대로 둬요.","세탁기 표준코스로 전체 세탁해요."],"product":["o2"],"warn":[],"tip":["세탁기에서 꺼냈을 때 이염이 보이면 바로 담금 세탁해야 빠져요."],"reel":"https://www.instagram.com/reel/C-O5aZJvx64/","title":null}},{"label":"배색 옷","desc":"흰 칼라 · 두 가지 이상 색","stop":true,"method":{"steps":["배색 옷에는 이 방법을 쓰면 안 돼요. 다른 색까지 함께 빠지거나 번질 수 있어요.","한 번 이염되면 집에서 복구하기 어려워요. 전문 세탁소에 상담해 보세요.","다음부터는 흰색에 원색·검정 배색이 있는 옷은 꼭 따로 세탁해 주세요."],"product":[],"warn":[],"tip":[],"reel":null,"title":null}}]},"warn":["오래된 이염은 빠지기 어려워요."]},{"id":"mud","cat":"life","name":"흙탕물","sub":"비 오는 날 · 놀이터","img":"mud","method":{"steps":["젖은 상태로 비비지 말고, 그대로 말린 뒤 솔로 흙을 털어요.","흙을 충분히 털어내고 흐르는 물에 씻어요.","얼룩에 오투와셔와 세제를 뿌리고 비빈 뒤 솔질해요.","얼룩 정도에 따라 12~24시간 그대로 둬요.","세탁기에 세제를 넣고 꼭 전체 세탁해요."],"product":["o2"],"warn":["젖은 상태에서 비비면 오히려 색이 착색돼요."],"tip":[],"reel":null,"title":null}},{"id":"burn","cat":"life","name":"그을림","sub":"캠핑 · 모닥불 그을음","img":"burn","method":{"steps":["미지근한 물에 베이킹소다 1컵과 세제 1숟가락을 잘 섞어요.","그을린 얼룩에 뿌리고 잘 비벼요.","얼룩이 남았다면 백식초를 붓고 다시 비벼요.","세탁기 표준세탁으로 돌려요.","그래도 남으면 오투와셔와 세제를 푼 물에 12~24시간 담그고, 중간중간 비빈 뒤 다시 세탁해요."],"product":["o2"],"warn":["불에 타 버린 부분은 복구가 어려워요."],"tip":[],"reel":"https://www.instagram.com/reel/C6pbtY-vu8Y/","title":null}}]};
+const IMG = Object.fromEntries(["asphalt", "bike", "blood", "burn", "coffee", "crayon", "dairy", "doraji", "dye", "fruit", "ink", "ketchup", "machine", "mud", "oil", "paint", "pen", "redsoup", "sticky", "sweat", "whiteout", "wine"].map(n=>[n,"img/"+n+".webp"]));
+const QRD = {"p_stain":[45,"fe6cbe328bfc10c351f4906e8008d404bb74ff952435dba340fb6baec1694c7f6107faaaaaaaafe002eb101f0096b8ef9a4500a20624a4a57dfe4f316e12fad97a30e6b0653b4e8a781c12738e3246492deaa60f910916827a3a9232abb0b21b8cd1d5e29ac4ccda2b34ffe1f72689d222fe5ffda4ff1467dc4c244deafd2b96aaad1ba71971182fc34fffffca88dee229e577e9f84c464d5122921b46ae26b5926e5966ff499cca22da840aa42bae29940b9d790f7e72d938012297f00e0882a27d1c6afaf355e0db2299b93afdfefb806c94449447f9816af4abd05b97172913ba641fd0dfc5d48de5847b2e8dd720727704ed3eb1eb0feaab6db7810"],"p_o2":[41,"fe8ecaf33fc1481f36906ea7c4fdebb74aa60515dbad89c472ec1168585507faaaaaaafe00a472c1009f99410dcbe887fcb99c1c80315702c8b43b07bdaeeb1b818f1e0ac1975fd49ec69125c6398861259eeb2d3182c50c9158af663eaa45c7c6b83f5e442dd8a2d9e6ba2f86438f8873dad83771381b01e63bd2a2121898f0da3c90ad751c9a4536f3241c22132cfab2fd2d9d44c6ab3862471f975ad753e0d436826eea0d9397fe80461e1e44bfb178cc6b905128e5513ba9165edf9dd7a82adcaae953fa6973049d403095fe88ead88c0"],"p_detergent":[41,"fe84c9af3fc11a2c45906e89c155abb7578ff7c5dba8beb322ec15ce833907faaaaaaafe01938d3e008b9acf357cb290b59d0e478afbfda872bc3f95f4bb6d9f78c4080a25d314d79addb15bb6484989392ba6c4734791306056f9bd46dcd24625218e4d46d2293fe326341089460cd154cfea9ddbb29253af1faa9b815f84c6bc6590ad45eb9f59473c70165fa5f4adb7b8f04805a9518747f09837d7396a13fbfa4c91d66f0a37fd005cb4d4c6ffac8bff6b304aa2bb911bae690d3f85d1ab3bd09ae8323d711304eb1b5d2bfeb11f8ddf0"],"p_down":[41,"fe9f4af33fc1405f36906ea5c4fdebb74a860515dbad89c472ec1168585507faaaaaaafe00a472c1009f99410dcbf2c7fcb99c18c0315702cab43b07bdaceb1b818f1e08e1975fd49f5e903dc6390861619ceb4931e2c50c9918bf663eae45c5c6b83e5e442dd8a2c9e7ba2b86438f8871cad83771389b01e63bd22e121898f0f07c90ad75149a4536f1200c22132dfaa2fd2d9d44c68b3862471f8f5b5753e09436c26eea27939ffe8056de1244bfb778ce6a905018e551bba8065edffdd7a82adcaae953fa6973049d403095fe88ead88c0"],"r_https://www.instagram.com/reel/CxErETZpDqh/":[33,"fe22693fc12fe9106eb883cbb7467e95dbaab7e2ec1692f107faaaaafe00f48f004a8adeda3ea5d3a3b6a952d91f2b8cdc2eb7a3fac40eb6d3223efd2ded711978c03bab6ead10b661c3a6d8b1e55b1ec2de3f26b7a2c4a55648982df7973c7a864fd3caff06f90048a0c5bf81cb2b5046e3d13bab87efddd3a819fae97cb9e105420a40fe655fe08"],"r_https://www.instagram.com/reel/DHHmfhKzQGm/":[33,"fe266d3fc11ce8106eb083cbb74efe85dbaa0fd2ec165af507faaaaafe00d58d004a9bdeda3e85d3a385b8d2d906274c9c2279abfac6a3aadb22ba9d2fed72087bc01abb6fad50b463c395c830f5429ec2d23fecd9aac681965b986bb3b53c18965ed3cafe07f9004aa0c5bf805bab504a63913bafa5afddd3b009fae97cb9e105713a40fe755fe08"],"r_https://www.instagram.com/reel/C4h0g-rOFkD/":[33,"fee5713fc12d67106e9e3babb741b275dbac7e3aec14a61107faaaaafe00a74a007f5cc298c6445f9b74b6ea3a9e2050ade525d27ddf898a28ac8e5aa3d40b49bddc4b6d72dca877cdfb44ce9886db919eeff8b68861deae77af1659141b0563c499cf9b380bf880492ec57fa6faead059ffb1fbaddc2fc5d5586a76ebbf37d90520ec9cfe2353910"],"r_https://www.instagram.com/reel/C9Y7_XEpVer/":[33,"fe57aa3fc15fe8106e9e9fabb7545325dbacd292ec13a02907faaaaafe013a72005ee851ed5e3798873c8af9f3bc26a80e63f85f8304a22ad3216eaee8f079afa2ad4eff3bf8264f2c757da32fddacadbd21cd20a5454dc963ced2cd393d97781727f7d78ed0fd0048a0c5bf8ede6a90594671ebae923f8dd6d7d296e9605a6f05afe7bffe16d1980"],"r_https://www.instagram.com/reel/C9G4SzDJ-X2/":[33,"fe266d3fc13eea106ea803cbb743fe95dbab27d2ec16d2f107faaaaafe00d68c004a8adeda7a87d1a386b1d35906abccdc2f3fa3b2c7a6eac322fedd2ded510b7bc03baa6ead149443c3b5d120e55b9a0ede3b6271c6c6291b4c98efd5973c1bb56dd3ebfe16f9006a82c5bf885b2b50426b913bad8f2fddd37959fae91c99e105520a40fe744fa08"],"r_https://www.instagram.com/reel/C8asSbky_0r/":[33,"fee1753fc10c64106e863b2bb74c2275dbad5e12ec14a61107faaaaafe00864b007f4dc29886665d9b76ae6a3a9fa890ede9615235de8c5a30ac4a7ca1d40a49bfdc4b6d72dce857cdfb65d69106cb9d1eeff93c2061de27b7bb161b52190523c6a9cf9a390af8806b2cc57fa662ead05533f1fbaffe8fc5d489fa76ebb917d90521cc5cfe3243910"],"r_https://www.instagram.com/reel/CwtkwiyJ13B/":[33,"fe57aa3fc16ce8106e969f2bb75d83b5dbae6aa2ec13a02907faaaaafe010a72005ef950ed5a159a871f8b7973a52ea80e623c37c306aea2cb2128a8e8f0799ca3ad6eff3af8666d0e754fb2beddbc25b121cd6465294ce0abcad28f193f977a3626f7f78ed1fd004aa0c5bf9f57ea905d8e31eba8dc9f8dd6cf4296e9265a6f05add67ffe16d1b80"],"r_https://www.instagram.com/reel/C_y8tXlvHNH/":[33,"fe93aa3fc17fe4106e863b2bb74043a5dba6f602ec126e3507faaaaafe0017400043cdc2c19a159a8726b6ebba8528b02fe67ebf83078a8a182c0a5aa3d459bfa1ad6b6c73dce0756df35da2be5db191fa2dfd3ece65dd6967dfd2d9161905015581efd78fc0fd006baec57fb7e36ad04dce71eba1386fc5d3d54af6e9667a6f05b3f6fcfe2253f10"],"r_https://www.instagram.com/reel/C-O5aZJvx64/":[33,"fed7aa3fc17ee6106e8f3b2bb7415325dba44602ec126e3107faaaaafe0024410043dcc2c1de379a8714bf6a3a8424702fe77a7f8b060206182c4a3ea1d43bbea0ad6b7d72dca4574df34da23e5da819fe2df8f60621dee0b3ccd25d121905407492eff68fd0fd0069aec57fae736ad045c671eba7968fc5d3099af6e9227a6f05b2f5fcfe2343d10"],"r_https://www.instagram.com/reel/Cru95iPAcuX/":[33,"fe25713fc153d0d06ead560bb748e2f5dba3e8eaec138ba507faaaaafe002293007620740302445f9b4980b0573c8d667684e91a75db8391411b2bcc7ab82b6abddcdeb71e6a00c13496f6d78906c40e73592c283d486f032eaf144e79afde910ee5799a291af8806698463f951fea10513bf1fba0a87fadd6e9ccaeebd937d905960571fe4ef56a0"],"r_https://www.instagram.com/reel/CzsEJ7YJiWz/":[33,"fed3ae3fc16ee7106e973babb7445325dba6de3aec12623507faaaaafe0015430043ddc3c1da379a8705a6eb3a84a8f06fee3a7fcb04af82002c8c5ea1d418afa0ad4a6c72dce4556ff37dab2edda8917a2dfdbcea2ddfc1abd2d2dd7619052376a3eff78ec1fd006b8ec57fbf6b6ad0414631eba196efc5d29cdaf6e9245a6f05b1f67cfe3343b10"],"r_https://www.instagram.com/reel/C2YjmuJv6d9/":[33,"fe22693fc11ce9106eb0034bb74afe95dbab97d2ec1652f107faaaaafe00e58f004a8adfda3aa7d3a3a5a1d2d90723ccdc2e374bfac72aa2db22f8db2ded700978c01abb6fad14b441c395c930655a1e82de32a61fcec48d4e5898eff7b73c58864ed3cbfe07f90068a0c5bf985a2b5042afd13ba9876fddd3f449fae95a99e105431800fe755fc08"],"r_https://www.instagram.com/reel/CwELMhIgfSD/":[33,"fe65713fc142d0d06eadd68bb74972f5dba2e0caec134ba507faaaaafe003393007631750342645d9b7b81b057248d66368069f23ddba20d4d1b69a878b8485abcdcfea61e6a04e11496c7d79886d4067b5924a4f3406c2b33a3144a3fafdeb22ef5799b390af8806698463f8d076a10513bb1fba408bfadd665ccaeebbf37d9059636f1fe4ef52a0"],"r_https://www.instagram.com/reel/C85kaqkSSfq/":[33,"fe26693fc13fe8106ea0834bb74b2e15dbab37d2ec165ef107faaaaafe00e78e004a9bdeda3aa7d3a3b6a152d90ea3cc9c2fb32bbac5a232db2238d92fed512878c03bbb6fad109441c395d820e54b1a829e3e2e5daec421125898ad93b73c78874fd3cbfe16f9004880c5bf9952ab504a2b913baf2b6fddd3e809fae91c99e105513940fe745ee08"],"r_https://www.instagram.com/reel/CwWMomwgPO4/":[33,"fe25713fc171d1d06ead560bb7407275dba0f8eaec1387a507faaaaafe002091007620750346445f9b4999b1d72d09a63689ed523dd88f11451bebec7ab8285bbcdcffb71e6a00e13496f7de9086dd8e7759212495006d2f73b314cc39afde900df779ba390af8804698463f940eea105df3b1fba2aa3fadd6b51caeebbd37d9058624f1fe5ee52a0"],"r_https://www.instagram.com/reel/C47kJb_uj_r/":[33,"fed3ae3fc15de6106e873b2bb7445335dba46632ec12ae3507faaaaafe0014430043cdc3c19a359a8714af6aba9528f06feeb8df8b052a06102ccc3aa1d47abfa3ad6b6d73dce0576df36ca2af5db911fa6dfd3c2e29dfec7fdad29b7619052265a2eff79ed1fd006baec57fa7fa6ad04dce71eba11eefc5d24ddaf6e9065a6f0582f6bcfe2352910"],"r_https://www.instagram.com/reel/DAA6MF-PKwW/":[33,"fe97ae3fc14fe7106e9ebb2bb74dc3f5dba77e02ec12263107faaaaafe0004400043cdc3c1da379a8717b66bba84a0306fe2b4f7cb072306102c8a3aa3d47a8ea2ad6b7d72dca0774df37eb2afcdb111b621f4f28c65dccdf2ddd2df3439052347b1efd69ed1fd004baec57fa6f26ad04d8e31eba194afc5d3c85af6e9625a6f05a1f53cfe3343d10"],"r_https://www.instagram.com/reel/C4fQY8Zuw1z/":[33,"fe25713fc171d0d06eb4d68bb74c22e5dba050e2ec1347a507faaaaafe002392007631750342465d9b59893157248566768cedfa35d88b095d1b698a7ab80a6abddcffb61f6a04c31496c4df8186c58a7f592464334c6d2ffbb314487baddeb31cc7799a281af8806498463f85076a105dbbf1fba2e25fadd6a94caeebff37d905a617f1fe4ff54a0"],"r_https://www.instagram.com/reel/C6pbtY-vu8Y/":[33,"fe266d3fc13ce8106eb1834bb74ebe55dbaa37c2ec1692f507faaaaafe00d48f004a9adeda3ea5d3a394a053591e27cc9c233de3f2c52beadb22fe9f2ded332878c01aba6ead109461c396c138654b9282de3e6ab7eec6a0c258986f91b53c78b44ed3eaef06f90048a0c5bf894b2b504aab913baf874fddd3e099fae97899e105500980fe644fc08"],"r_https://www.instagram.com/reel/DFMCCFBzEmk/":[33,"fed7ae3fc15ee7106e86bb2bb7410335dba7c602ec12ae3107faaaaafe0026430043ddc2c19a35988726bfea3a9da4302fea3cf78b06870a102c8c7aa1d438ada3ad6a6d72dca4554ff37fabbecda091b221f532c46ddc6937d1d2d91039050274a0efd69ec0fd00498cc57fa66bead04d8e31eba1762fc5d358caf6e9465a6f0592d5bcfe3353b10"],"r_https://www.instagram.com/reel/Cu8F2UVgdGn/":[33,"fea5753fc12e67106e9ebbabb744a2e5dbadfe22ec14ae1507faaaaafe00a74b007f5cc29882465f9b56bfeaba972410ade52dba35dd005a2cac4c1ca3d42a69bedc6a7d72dca875effb67c70086c2999aeff4f28a2ddeab23a3165f361b0523e5b9cf9a391bf880492ec57fbe6bead05d37b1fba9186fc5d549ea76ebff37d90512fe9cfe2242d10"],"r_https://www.instagram.com/reel/C2qobLovc16/":[33,"fee1713fc13e67106e97bb2bb741a275dbafd602ec14a61507faaaaafe00a44b007f5cc29886665d9b75ae6aba962c50ede1a7723ddf08ce38ac0838a1d40878bedc6a6d73dce877cffb54df0886da955eaff8b4c829df0a6eab161b14190541d4b9cfba380af880690ec57faf726ad05d77f1fbafb88fc5d499ba76ebb937d90512ce1cfe2343b10"],"r_https://www.instagram.com/reel/C1qRv85JEHK/":[33,"fe97aa3fc15fe4106e973b2bb748d3e5dba6763aec12663507faaaaafe0015420043cdc2c19e15988736bfebba8c28706fe3363fc3078b8a082c8a7aa3d459ada3ad6a6c72dca0776ff34da3aeddb91df62dfc320a61de447bd2d2df1439050264a1eff79fc1fd00498cc57fae7bead049ce31eba75c6fc5d2144af6e9247a6f05b3c63cfe2253d10"],"r_https://www.instagram.com/reel/C15zLREp74v/":[33,"fe97ae3fc15ee6106e863b2bb7495325dba77602ec12263507faaaaafe0027400043ddc3c1de17988735bf6bba8ca4f06fe3b27f8b062a86102ccc1ca3d4398da3ad4b6d73dce0756df36fbb3fddb095f22dfc36c601dcc07bcad21f7219056375b0eff78ed1fd00498cc57fbfe2ead04d8631eba31e8fc5d39ddaf6e9207a6f0593d63cfe2242d10"]};
+const QR = new Proxy({}, {get(_,k){ const q=QRD[k]; if(!q) return ''; const [n,h]=q; let d=''; 
+  for(let i=0;i<n*n;i++){ if((parseInt(h[i>>2],16)>>(3-(i&3)))&1) d+=`M${i%n} ${Math.floor(i/n)}h1v1h-1z`; }
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${n} ${n}" shape-rendering="crispEdges"><path fill="#18242C" d="${d}"/></svg>`; }});
+
+const PROD_SVG = {
+ stain:`<svg viewBox="0 0 60 88" fill="none" stroke="#2a3338" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 30h18l3 8v40a6 6 0 0 1-6 6H25a6 6 0 0 1-6-6V38z" fill="#fff"/><path d="M24 30v-8h14v8"/><path d="M24 22h-6l-6-6h20v6"/><path d="M38 16l8-4M38 20l9 0M38 24l8 4" stroke-width="1.8"/><path d="M25 50h12M25 56h12" stroke-width="1.6"/><circle cx="31" cy="66" r="4" fill="#2FA8DC" stroke="none"/></svg>`,
+ o2:`<svg viewBox="0 0 60 88" fill="none" stroke="#2a3338" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 14h36l-2 66H14z" fill="#fff"/><path d="M12 14l3-6h30l3 6"/><path d="M18 24h24" stroke-width="1.6"/><text x="30" y="38" font-family="Noto Sans KR,sans-serif" font-weight="900" font-size="9" fill="#2FA8DC" stroke="none" text-anchor="middle">O₂</text><path d="M22 52c4-6 12-6 16 0v12H22z" fill="#E4F4FB"/><path d="M26 52v-3h8v3"/></svg>`,
+ detergent:`<svg viewBox="0 0 60 88" fill="none" stroke="#2a3338" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 22h24l4 10v46a6 6 0 0 1-6 6H20a6 6 0 0 1-6-6V32z" fill="#fff"/><rect x="22" y="10" width="16" height="12" rx="2"/><path d="M30 42c-6 0-8 6-8 10 0 6 4 10 8 10s8-4 8-10c0-4-2-10-8-10z" fill="#E9F6F1"/><path d="M26 40l4-6 4 6"/><path d="M22 70h16" stroke-width="1.6"/></svg>`,
+ down:`<svg viewBox="0 0 60 88" fill="none" stroke="#2a3338" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 24h28l2 8v46a6 6 0 0 1-6 6H20a6 6 0 0 1-6-6V32z" fill="#fff"/><rect x="21" y="12" width="18" height="12" rx="3"/><path d="M24 64c2-12 10-18 14-20-2 6-4 14-12 20z" fill="#E4F4FB"/><path d="M24 64l10-14"/><path d="M22 72h16" stroke-width="1.6"/></svg>`
+};
+
+const app = document.getElementById('app');
+let S = {view:'home'};
+const back = () => history.back();
+
+function go(next, push=true){
+  S = next;
+  if(push) history.pushState(S,''); else history.replaceState(S,'');
+  render(); window.scrollTo({top:0,behavior:'instant'});
+}
+window.addEventListener('popstate', e => { S = e.state || {view:'home'}; render(); });
+
+const catIdx = id => DATA.cats.findIndex(c=>c.id===id)+1;
+const stainsOf = cid => DATA.stains.filter(s=>s.cat===cid);
+const stainNo = s => `${catIdx(s.cat)}-${stainsOf(s.cat).indexOf(s)+1}`;
+const getStain = id => DATA.stains.find(s=>s.id===id);
+function getMethod(s, b){
+  if(s.branch){ const o=s.branch.options[b]; return {...o.method, warn:[...(s.warn||[]),...o.method.warn], reel:o.method.reel||s.reel, stop:o.stop}; }
+  return {...s.method, reel:s.method.reel};
+}
+const esc = t => String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const chev = `<svg class="arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg>`;
+
+function topBar(){
+  if(S.view==='home') return '';
+  return `<header class="top"><button class="back" onclick="back()" aria-label="뒤로"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+  <button class="brand" onclick="go({view:'home'})">때를 아는 <span>세탁</span></button></header>`;
+}
+function crumbs(){
+  const c=[];
+  if(S.cat){ const cat=DATA.cats.find(x=>x.id===S.cat); c.push(`<span class="chip"><b>${catIdx(S.cat)}</b>${cat.name}</span>`); }
+  if(S.stain){ const s=getStain(S.stain); c.push(`<span class="chip"><b>${stainNo(s)}</b>${s.name}</span>`);
+    if(s.branch && S.b!=null) c.push(`<span class="chip"><b>${stainNo(s)}-${S.b+1}</b>${s.branch.options[S.b].label}</span>`); }
+  return c.length?`<div class="crumbs">${c.join('')}</div>`:'';
+}
+
+function vHome(){
+  return `<div class="hero view">
+    <div class="art"><img src="${IMG.coffee}" alt=""><img src="${IMG.ink}" alt=""><img src="${IMG.wine}" alt=""></div>
+    <div class="eyebrow">땡스맘의 얼룩별 세탁 공식</div>
+    <h1>어떤 얼룩이<br>묻었나요?</h1>
+    <p class="lead" style="margin-top:10px">얼룩 종류를 차례로 고르면<br>단계별 세탁법과 추천 제품을 알려 드려요.</p>
+    <div class="rules">
+      <div class="rule"><i>🚫</i>물티슈<br>금지</div>
+      <div class="rule"><i>🔥</i>뜨거운 물<br>금지</div>
+      <div class="rule"><i>⏱️</i>최대한<br>빨리</div>
+    </div>
+    <button class="cta" onclick="go({view:'cats'})">시작하기 ${chev.replace('class="arrow"','style="color:#fff"')}</button>
+  </div>
+  <div class="foot">『때를 아는 세탁』 · 조용미(땡스맘)<br>얼룩이 오래될수록 반복과 시간이 필요해요.</div>`;
+}
+
+function vCats(){
+  return `<div class="view">${crumbs()}
+    <div class="eyebrow">STEP 1</div><h2>오염 종류를 골라 주세요</h2>
+    <p class="lead">얼룩이 어디서 생겼는지에 따라 나눴어요.</p>
+    <div class="list">${DATA.cats.map((c,i)=>`
+      <button class="opt" onclick="go({view:'stains',cat:'${c.id}'})">
+        <span class="thumb"><img src="${IMG[c.img]}" alt=""></span>
+        <span class="t"><b>${c.name}</b><small>${c.desc}</small></span>
+        <span class="num">${i+1}</span>
+      </button>`).join('')}
+    </div></div>`;
+}
+
+function vStains(){
+  const list=stainsOf(S.cat);
+  return `<div class="view">${crumbs()}
+    <div class="eyebrow">STEP 2</div><h2>어떤 얼룩인가요?</h2>
+    <p class="lead">가장 비슷한 얼룩을 눌러 주세요.</p>
+    <div class="grid">${list.map(s=>`
+      <button class="tile" onclick="pickStain('${s.id}')">
+        <div class="pic"><img src="${IMG[s.img]}" alt=""></div>
+        <span class="num">${stainNo(s)}</span>
+        ${s.branch?`<span class="split">${s.branch.options.length}가지</span>`:''}
+        <b>${s.name}</b><small>${s.sub}</small>
+      </button>`).join('')}
+    </div></div>`;
+}
+function pickStain(id){
+  const s=getStain(id);
+  if(s.branch) go({view:'branch',cat:s.cat,stain:id});
+  else go({view:'steps',cat:s.cat,stain:id,i:0});
+}
+
+function vBranch(){
+  const s=getStain(S.stain);
+  return `<div class="view">${crumbs()}
+    <div class="qart"><img src="${IMG[s.img]}" alt=""></div>
+    <div class="eyebrow">STEP 3</div><h2>${s.branch.q}</h2>
+    <p class="lead">선택에 따라 세탁법이 달라져요.</p>
+    <div class="list">${s.branch.options.map((o,k)=>`
+      <button class="opt" onclick="go({view:'steps',cat:'${s.cat}',stain:'${s.id}',b:${k},i:0})">
+        <span class="num">${stainNo(s)}-${k+1}</span>
+        <span class="t"><b>${o.label}</b><small>${o.desc}</small></span>${chev}
+      </button>`).join('')}
+    </div></div>`;
+}
+
+function vSteps(){
+  const s=getStain(S.stain), m=getMethod(s,S.b), n=m.steps.length, i=S.i;
+  const last=i===n-1;
+  const notes = last ? [...m.warn.map(w=>`<div class="note w"><b>⚠️</b><span>${esc(w)}</span></div>`), ...m.tip.map(t=>`<div class="note t"><b>💡</b><span>${esc(t)}</span></div>`)].join('') : '';
+  return `<div class="view">${crumbs()}
+    <div class="progress">${m.steps.map((_,k)=>`<span class="${k<=i?'on':''}"></span>`).join('')}</div>
+    <div class="stepcard">
+      <div class="pic"><img src="${IMG[s.img]}" alt=""></div>
+      <div class="stepno">STEP ${i+1} <em>/ ${n}</em></div>
+      <p class="steptext">${esc(m.steps[i])}</p>
+    </div>
+    ${notes?`<div class="notes">${notes}</div>`:''}
+    <div class="nav">
+      <button class="ghost" onclick="${i===0?'back()':`go({...S,i:${i-1}},false)`}">이전</button>
+      <button class="cta ${last?'sky':''}" onclick="${last?`go({...S,view:'result'})`:`go({...S,i:${i+1}},false)`}">${last?(m.stop?'정리 보기':'추천 제품 보기'):'다음 단계'}</button>
+    </div>
+    <div class="dots">${m.steps.map((t,k)=>`<button class="mini ${k===i?'cur':''}" onclick="go({...S,i:${k}},false)"><i>${k+1}</i><span>${esc(t)}</span></button>`).join('')}</div>
+  </div>`;
+}
+
+function vResult(){
+  const s=getStain(S.stain), m=getMethod(s,S.b);
+  const label = s.name + (s.branch? ` · ${s.branch.options[S.b].label}`:'');
+  let html = `<div class="view">${crumbs()}<div class="done"><span class="badge">✓ ${esc(label)} 세탁법 완료</span>`;
+  if(m.stop){
+    html += `<h2>이 옷은 집에서<br>무리하지 마세요</h2></div><div class="stopcard">${m.steps.map(esc).join('<br><br>')}</div>`;
+  } else {
+    html += `<h2>이 제품을 사용하는 게<br>좋아요</h2><p class="lead">${esc(s.name)} 얼룩엔 이렇게 준비해 두세요.</p></div>`;
+    html += m.product.map((pid,k)=>{
+      const p=DATA.products[pid];
+      return `<div class="prod">
+        <div class="head"><div class="pimg">${PROD_SVG[pid]}</div>
+          <div><div class="tag">${k===0?'추천 1순위':'함께 쓰면 좋아요'} · ${esc(p.tag)}</div><div class="nm">${esc(p.name)}</div></div></div>
+        <div class="body">${esc(p.desc)}<div class="pn">${esc(p.note)}</div></div>
+        <div class="qrrow"><div class="qr">${QR['p_'+pid]}</div>
+          <div class="qrtxt"><b>QR로 바로 구매하기</b>휴대폰 카메라로 찍으면 제품 페이지로 연결돼요.<br><a href="${p.url}" target="_blank" rel="noopener">제품 보러 가기 →</a></div></div>
+      </div>`;}).join('');
+  }
+  if(m.reel){
+    html += `<div class="reel"><div class="qr">${QR['r_'+m.reel]}</div><div class="qrtxt"><b>영상으로 보고 싶다면?</b>땡스맘 인스타그램 릴스로 연결돼요.<br><a href="${m.reel}" target="_blank" rel="noopener" style="background:none;color:var(--sky-d);padding:0">릴스 보러 가기 →</a></div></div>`;
+  }
+  html += `<div class="actions">
+    <button class="cta" onclick="go({view:'steps',cat:'${s.cat}',stain:'${s.id}',${S.b!=null?`b:${S.b},`:''}i:0})">세탁법 다시 보기</button>
+    <button class="ghost" onclick="go({view:'cats'})">다른 얼룩 찾기</button>
+  </div></div>`;
+  return html;
+}
+
+function render(){
+  const v = {home:vHome,cats:vCats,stains:vStains,branch:vBranch,steps:vSteps,result:vResult}[S.view]||vHome;
+  app.innerHTML = topBar() + v() + (S.view!=='home'?`<div class="foot">『때를 아는 세탁』 · 조용미(땡스맘)</div>`:'');
+}
+history.replaceState(S,'');
+render();
+</script>
+</body>
+</html>
